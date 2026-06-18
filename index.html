@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarUz Pro — Quyosh Panellari Markazi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --glass:rgba(255,255,255,0.07);
+  --glass-md:rgba(255,255,255,0.11);
+  --glass-strong:rgba(255,255,255,0.16);
+  --gb:rgba(255,255,255,0.18);
+  --gb-md:rgba(255,255,255,0.26);
+  --blur:blur(28px) saturate(200%);
+  --shadow:0 8px 40px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.14),inset 0 -1px 0 rgba(0,0,0,0.1);
+  --orange:#FF9F0A;--gold:#FFD60A;--blue:#0A84FF;--green:#30D158;--red:#FF453A;
+  --text:rgba(255,255,255,0.95);--muted:rgba(255,255,255,0.55);--dim:rgba(255,255,255,0.3);
+  --r:20px;--rs:12px;--rl:28px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:#060818;color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* BG */
+.bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg-g{position:absolute;inset:0;background:
+  radial-gradient(ellipse 90% 55% at 50% -5%,rgba(255,149,0,.38) 0%,transparent 60%),
+  radial-gradient(ellipse 60% 45% at 82% 18%,rgba(255,214,10,.2) 0%,transparent 52%),
+  radial-gradient(ellipse 55% 65% at -10% 55%,rgba(10,132,255,.18) 0%,transparent 60%),
+  radial-gradient(ellipse 100% 100% at 50% 50%,#070920 35%,#0b0f22 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:flt 8s ease-in-out infinite}
+.o1{width:700px;height:700px;background:rgba(255,149,0,.22);top:-250px;left:50%;transform:translateX(-50%)}
+.o2{width:450px;height:450px;background:rgba(255,214,10,.13);top:8%;right:-120px;animation-delay:-3s}
+.o3{width:380px;height:380px;background:rgba(10,132,255,.14);bottom:15%;left:-100px;animation-delay:-5.5s}
+@keyframes flt{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.04)}}
+.o1{animation-name:flt1}
+@keyframes flt1{0%,100%{transform:translateX(-50%) translateY(0) scale(1)}50%{transform:translateX(-50%) translateY(-28px) scale(1.04)}}
+
+/* SUN */
+.sun-wrap{position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:640px;height:640px}
+.sun-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:110px;height:110px;background:radial-gradient(circle,#FFE340 0%,#FF9F0A 55%,transparent 72%);border-radius:50%;box-shadow:0 0 50px 28px rgba(255,214,10,.45),0 0 110px 55px rgba(255,149,0,.22);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 50px 28px rgba(255,214,10,.45),0 0 110px 55px rgba(255,149,0,.22)}50%{box-shadow:0 0 70px 38px rgba(255,214,10,.58),0 0 150px 75px rgba(255,149,0,.32)}}
+.ray{position:absolute;top:50%;left:50%;width:2px;transform-origin:0 0;animation:spin 22s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* NAV */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1380px;z-index:1000;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--rl);box-shadow:var(--shadow);padding:13px 24px;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:var(--text);text-decoration:none;flex-shrink:0}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--orange));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 14px rgba(255,149,0,.5)}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.nl{padding:7px 16px;border-radius:20px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:all .2s}
+.nl:hover,.nl.active{background:var(--glass-md);color:var(--text)}
+.nav-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn{padding:8px 18px;background:var(--glass);border:1px solid var(--gb);border-radius:20px;color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.btn:hover{background:var(--glass-md);border-color:var(--gb-md);transform:translateY(-1px)}
+.btn-p{background:linear-gradient(135deg,var(--orange),var(--gold));border:none;color:#000;font-weight:700;box-shadow:0 4px 18px rgba(255,149,0,.42)}
+.btn-p:hover{box-shadow:0 6px 26px rgba(255,149,0,.62);transform:translateY(-2px)}
+.cart-btn{position:relative}
+.cc{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--orange);border-radius:50%;font-size:11px;font-weight:800;color:#000;display:flex;align-items:center;justify-content:center}
+
+/* MAIN */
+main{position:relative;z-index:1}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 24px 90px;position:relative}
+.badge-top{display:inline-flex;align-items:center;gap:6px;padding:6px 18px;background:rgba(255,214,10,.09);border:1px solid rgba(255,214,10,.32);border-radius:20px;font-size:13px;font-weight:600;color:var(--gold);margin-bottom:28px;animation:fadeUp .6s ease both}
+.hero h1{font-size:clamp(40px,7vw,86px);font-weight:900;line-height:1.04;margin-bottom:24px;letter-spacing:-2px;animation:fadeUp .7s ease both;animation-delay:.1s}
+.hi{background:linear-gradient(135deg,var(--gold) 0%,var(--orange) 50%,#FF6500 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(15px,2vw,20px);color:var(--muted);max-width:580px;line-height:1.75;margin-bottom:40px;animation:fadeUp .7s ease both;animation-delay:.2s}
+.hero-act{display:flex;gap:12px;animation:fadeUp .7s ease both;animation-delay:.3s;flex-wrap:wrap;justify-content:center}
+.btn-xl{padding:14px 34px;font-size:16px;border-radius:26px}
+.stats-row{display:flex;gap:0;margin-top:68px;animation:fadeUp .7s ease both;animation-delay:.4s}
+.sc{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);padding:28px 38px;text-align:center}
+.sc:first-child{border-radius:var(--r) 0 0 var(--r)}
+.sc:last-child{border-radius:0 var(--r) var(--r) 0}
+.sc:not(:last-child){border-right:none}
+.sn{font-size:34px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.sl{font-size:12px;color:var(--muted);margin-top:4px;display:block;text-transform:uppercase;letter-spacing:.8px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* BRANDS */
+.brands{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:40px 24px;max-width:1380px;margin:0 auto}
+.brand{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:50px;padding:9px 22px;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;cursor:default}
+.brand:hover{color:var(--text);border-color:rgba(255,149,0,.45);background:rgba(255,149,0,.08)}
+
+/* SECTION */
+section{padding:80px 24px;max-width:1380px;margin:0 auto}
+.sh{text-align:center;margin-bottom:52px}
+.ey{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--orange);margin-bottom:12px}
+.st{font-size:clamp(26px,4vw,44px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+.ss{font-size:16px;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.75}
+
+/* CATEGORIES */
+.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.cat{padding:10px 22px;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:50px;color:var(--muted);font-size:14px;font-weight:500;cursor:pointer;transition:all .25s;white-space:nowrap;font-family:inherit}
+.cat:hover{background:var(--glass-md);color:var(--text);border-color:var(--gb-md)}
+.cat.active{background:linear-gradient(135deg,rgba(255,149,0,.28),rgba(255,214,10,.18));border-color:rgba(255,149,0,.55);color:var(--gold);box-shadow:0 0 20px rgba(255,149,0,.18)}
+
+/* PRODUCT GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:18px}
+.pc{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--rl);overflow:hidden;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;cursor:pointer}
+.pc::before{content:'';position:absolute;inset:0;border-radius:var(--rl);background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 55%);pointer-events:none;z-index:1}
+.pc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);z-index:2}
+.pc:hover{transform:translateY(-7px);border-color:rgba(255,149,0,.42);box-shadow:0 22px 60px rgba(0,0,0,.45),0 0 28px rgba(255,149,0,.14)}
+.pi{height:178px;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;overflow:hidden}
+.pbadge{position:absolute;top:12px;left:12px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;z-index:3}
+.bg{background:rgba(255,214,10,.18);border:1px solid rgba(255,214,10,.45);color:var(--gold)}
+.bh{background:rgba(255,69,58,.18);border:1px solid rgba(255,69,58,.45);color:#FF6B60}
+.bn{background:rgba(48,209,88,.18);border:1px solid rgba(48,209,88,.45);color:#4ADB72}
+.bs{background:rgba(10,132,255,.18);border:1px solid rgba(10,132,255,.45);color:#5AC8FA}
+.pb{padding:18px}
+.pt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:5px}
+.pn{font-size:16px;font-weight:700;margin-bottom:12px;line-height:1.3}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
+.sp{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--rs);padding:8px 10px}
+.spl{font-size:10px;color:var(--dim);display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px}
+.spv{font-size:13px;font-weight:600}
+.pfoot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.07)}
+.price-now{font-size:23px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.price-old{font-size:12px;color:var(--dim);text-decoration:line-through;margin-top:3px}
+.add{width:40px;height:40px;background:linear-gradient(135deg,var(--orange),var(--gold));border:none;border-radius:12px;font-size:22px;font-weight:400;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 4px 14px rgba(255,149,0,.42);line-height:1}
+.add:hover{transform:scale(1.12);box-shadow:0 6px 22px rgba(255,149,0,.62)}
+.hidden{opacity:0;transform:translateY(18px)}
+.vis{animation:fadeUp .45s ease both}
+
+/* FEATURES */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+.fc{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--rl);padding:30px;position:relative;overflow:hidden;transition:all .3s}
+.fc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)}
+.fc:hover{transform:translateY(-4px);border-color:rgba(255,149,0,.28)}
+.fi{font-size:38px;margin-bottom:18px;display:block}
+.ft{font-size:17px;font-weight:700;margin-bottom:8px}
+.fd{font-size:14px;color:var(--muted);line-height:1.72}
+
+/* CALCULATOR */
+.calc-wrap{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--rl);padding:48px;position:relative;overflow:hidden}
+.calc-wrap::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.cinputs{display:flex;flex-direction:column;gap:22px}
+.cig{display:flex;flex-direction:column;gap:8px}
+.cl{font-size:14px;font-weight:500;color:var(--muted)}
+.cv{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:2px}
+input[type=range]{-webkit-appearance:none;height:4px;background:rgba(255,255,255,.1);border:none;border-radius:2px;outline:none;width:100%;margin:4px 0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:linear-gradient(135deg,var(--orange),var(--gold));border-radius:50%;cursor:pointer;box-shadow:0 2px 8px rgba(255,149,0,.5)}
+.ci{background:rgba(255,255,255,.06);border:1px solid var(--gb);border-radius:var(--rs);padding:11px 14px;color:var(--text);font-size:15px;font-weight:600;font-family:inherit;outline:none;transition:all .2s;width:100%;margin-top:4px}
+.ci:focus{border-color:var(--orange);background:rgba(255,149,0,.06)}
+.cresults{display:flex;flex-direction:column;gap:14px}
+.rc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:20px 24px}
+.rl{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:5px}
+.rv{font-size:27px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* CONTACT */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.cinfo{display:flex;flex-direction:column;gap:14px}
+.ci-item{display:flex;align-items:center;gap:16px;background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:18px 22px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);transition:all .2s}
+.ci-item:hover{border-color:rgba(255,149,0,.3);transform:translateX(4px)}
+.ci-icon{font-size:26px;flex-shrink:0}
+.ci-item h4{font-size:14px;font-weight:700;margin-bottom:3px}
+.ci-item p{font-size:13px;color:var(--muted)}
+.cform{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--rl);padding:34px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.cform::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)}
+.fi{background:rgba(255,255,255,.06);border:1px solid var(--gb);border-radius:var(--rs);padding:12px 16px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:all .2s;width:100%}
+.fi:focus{border-color:var(--orange);background:rgba(255,149,0,.06)}
+.fi::placeholder{color:var(--dim)}
+.fi option{background:#12172a;color:var(--text)}
+textarea.fi{resize:vertical;min-height:110px}
+
+/* FOOTER */
+footer{background:rgba(0,0,0,.5);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-top:1px solid var(--gb);padding:58px 24px 28px;position:relative;z-index:1}
+.fg{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:44px;max-width:1380px;margin:0 auto 44px}
+.fbrand p{font-size:14px;color:var(--muted);line-height:1.75;margin:14px 0 22px;max-width:280px}
+.fh{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:18px}
+.fl{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fl a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
+.fl a:hover{color:var(--text)}
+.fb-bottom{border-top:1px solid var(--gb);padding-top:26px;display:flex;align-items:center;justify-content:space-between;max-width:1380px;margin:0 auto;flex-wrap:wrap;gap:12px}
+.fb-bottom p{font-size:13px;color:var(--dim)}
+.socials{display:flex;gap:8px}
+.sb{width:36px;height:36px;background:var(--glass);border:1px solid var(--gb);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none}
+.sb:hover{background:var(--glass-md);border-color:rgba(255,149,0,.4);transform:translateY(-2px)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--glass-strong);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--gb);border-radius:var(--r);padding:14px 20px;font-size:14px;font-weight:500;z-index:9999;transform:translateY(100px);opacity:0;transition:all .32s cubic-bezier(.25,.8,.25,1);box-shadow:0 8px 30px rgba(0,0,0,.45);max-width:340px}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .stats-row{flex-direction:column;gap:0}
+  .sc:first-child{border-radius:var(--r) var(--r) 0 0}
+  .sc:last-child{border-radius:0 0 var(--r) var(--r)}
+  .sc{border-right:1px solid var(--gb) !important}
+  .cg{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr;gap:28px}
+  .calc-wrap{padding:28px 20px}
+}
+@media(max-width:560px){
+  nav{padding:10px 14px}
+  .nav-r .btn:not(.cart-btn):not(.btn-p){display:none}
+  .hero h1{letter-spacing:-1px}
+  .fg{grid-template-columns:1fr}
+}
+
+/* SCROLL INDICATOR */
+.scroll-ind{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--dim);font-size:11px;letter-spacing:1px;text-transform:uppercase;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+
+/* PROMO BANNER */
+.promo{background:linear-gradient(135deg,rgba(255,149,0,.15),rgba(255,214,10,.1));border:1px solid rgba(255,214,10,.25);border-radius:var(--r);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.promo-text{font-size:15px;font-weight:600}
+.promo-text span{color:var(--gold)}
+
+/* IMG BG */
+.pi-bg{position:absolute;inset:0;opacity:.06}
+.pi-bg2{background:linear-gradient(135deg,rgba(255,149,0,.15),rgba(255,214,10,.08))}
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BACKGROUND -->
+<div class="bg-wrap">
+  <div class="bg-g"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="sun-wrap" id="sunWrap">
+    <div class="sun-core"></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">☀️</div>
+    SolarUz Pro
+  </a>
+  <div class="nav-links">
+    <a href="#products" class="nl active">Mahsulotlar</a>
+    <a href="#features" class="nl">Xususiyatlar</a>
+    <a href="#calculator" class="nl">Kalkulyator</a>
+    <a href="#contact" class="nl">Aloqa</a>
+  </div>
+  <div class="nav-r">
+    <a href="tel:+998901234567" class="btn">📞 +998 90 123-45-67</a>
+    <button class="btn cart-btn" onclick="toggleCart()">
+      🛒 Savat
+      <span class="cc" id="cartCount">0</span>
+    </button>
+    <button class="btn btn-p" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Bepul Maslahat →</button>
+  </div>
+</nav>
+
+<main>
+<!-- ======================== HERO ======================== -->
+<div class="hero">
+  <span class="badge-top">⚡ O'zbekistondagi №1 Quyosh Paneli Markazi</span>
+  <h1>Quyosh Energiyasi<br>bilan <span class="hi">Kelajak</span> Yarating</h1>
+  <p>Eng yuqori sifatli quyosh panellari, invertorlar va batareyalar top narxlarda. 500+ mahsulot, 25 yillik kafolat, professional o'rnatish xizmati.</p>
+  <div class="hero-act">
+    <button class="btn btn-p btn-xl" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Mahsulotlarni Ko'rish →</button>
+    <button class="btn btn-xl" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">💡 Tejamkorlikni Hisoblash</button>
+  </div>
+  <div class="stats-row">
+    <div class="sc"><span class="sn">500+</span><span class="sl">Mahsulot turi</span></div>
+    <div class="sc"><span class="sn">12 000+</span><span class="sl">Mamnun mijozlar</span></div>
+    <div class="sc"><span class="sn">25 yil</span><span class="sl">Kafolat muddati</span></div>
+    <div class="sc"><span class="sn">98%</span><span class="sl">Mijoz mamnuniyati</span></div>
+  </div>
+  <div class="scroll-ind">↓ Pastga aylantiring</div>
+</div>
+
+<!-- BRANDS -->
+<div class="brands">
+  <div class="brand">☀️ SunPower</div>
+  <div class="brand">🔵 LG Solar</div>
+  <div class="brand">⚪ Panasonic</div>
+  <div class="brand">🍁 Canadian Solar</div>
+  <div class="brand">🦅 Jinko Solar</div>
+  <div class="brand">🌟 Trina Solar</div>
+  <div class="brand">🔴 SMA</div>
+  <div class="brand">🟠 Fronius</div>
+  <div class="brand">🌐 Huawei</div>
+  <div class="brand">⚡ Tesla Energy</div>
+  <div class="brand">🟩 BYD</div>
+  <div class="brand">🔆 LONGi Solar</div>
+  <div class="brand">🌊 Sungrow</div>
+  <div class="brand">🇩🇪 Sonnen</div>
+</div>
+
+<!-- ======================== PRODUCTS ======================== -->
+<section id="products">
+  <div class="sh">
+    <div class="ey">Katalog 2024</div>
+    <h2 class="st">Quyosh Panellari & Uskunalar</h2>
+    <p class="ss">Eng yaxshi jahon brendlaridan 36+ premium mahsulot. Har bir ehtiyoj uchun mos yechim mavjud.</p>
+  </div>
+
+  <!-- PROMO BANNER -->
+  <div class="promo">
+    <div>
+      <div class="promo-text">🎁 Maxsus taklif: <span>5 kW va undan yuqori tizimlar uchun bepul montaj!</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Taklifdan foydalanish muddati: 31-dekabr 2024-yilgacha</div>
+    </div>
+    <button class="btn btn-p" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hoziroq Buyurtma →</button>
+  </div>
+
+  <div class="cats" id="catBtns">
+    <button class="cat active" onclick="filter('all',this)">🌟 Barchasi (36)</button>
+    <button class="cat" onclick="filter('uy',this)">🏠 Uy uchun (9)</button>
+    <button class="cat" onclick="filter('tijorat',this)">🏢 Tijorat (5)</button>
+    <button class="cat" onclick="filter('sanoat',this)">🏭 Sanoat (5)</button>
+    <button class="cat" onclick="filter('invertor',this)">⚡ Invertorlar (8)</button>
+    <button class="cat" onclick="filter('batareya',this)">🔋 Batareyalar (5)</button>
+    <button class="cat" onclick="filter('aksessuar',this)">🔧 Aksessuarlar (4)</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ======================== FEATURES ======================== -->
+<section id="features">
+  <div class="sh">
+    <div class="ey">Afzalliklar</div>
+    <h2 class="st">Nima Uchun SolarUz Pro?</h2>
+    <p class="ss">Sifat, ishonch va professional xizmat — 2015-yildan beri bizning asosiy tamoyillarimiz.</p>
+  </div>
+  <div class="fgrid">
+    <div class="fc">
+      <span class="fi">🏆</span>
+      <h3 class="ft">Premium Sifat Kafolati</h3>
+      <p class="fd">Faqat sertifikatlangan, top brendlarning original mahsulotlarini yetkazib beramiz. Har bir panel IEC 61215, IEC 61730 va CE sifat standartlarini to'liq qondiradi.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">🛡️</span>
+      <h3 class="ft">25 Yillik Kafolat</h3>
+      <p class="fd">Barcha quyosh panellarimizga 25 yillik mahsulot kafolati va 30 yillik quvvat kafolati beramiz. Sizning investitsiyangiz to'liq himoyada bo'ladi.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">⚙️</span>
+      <h3 class="ft">Professional Montaj</h3>
+      <p class="fd">Sertifikatlangan muhandislar jamoasi tomonidan montaj ishlari amalga oshiriladi. Butun O'zbekiston bo'ylab yetib boramiz va sifatli xizmat ko'rsatamiz.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">🚀</span>
+      <h3 class="ft">Tez Yetkazib Berish</h3>
+      <p class="fd">Toshkent bo'ylab 24 soat, barcha viloyatlarga 2–3 kun ichida yetkazib beramiz. 5 kW va yuqori buyurtmalarda yetkazib berish mutlaqo bepul.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">💰</span>
+      <h3 class="ft">Qulay Muddatli To'lov</h3>
+      <p class="fd">Naqd, bank o'tkazmasi yoki 0% foizli bo'lib to'lash imkoniyati. 6 oydan 24 oygacha muddatli to'lov — bank hamkorlarimiz orqali tez rasmiylashtirish.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">📞</span>
+      <h3 class="ft">24/7 Texnik Yordam</h3>
+      <p class="fd">Texnik mutaxassislar jamoamiz doimo tayyor. Har qanday savol, nosozlik yoki texnik muammo bo'lsa, bir qo'ng'iroq bilan yordam ko'rsatamiz.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">📊</span>
+      <h3 class="ft">Aqlli Monitoring</h3>
+      <p class="fd">Har bir o'rnatilgan tizim uchun mobil ilova orqali real vaqtda monitoring. Quvvat ishlab chiqarish, tejamkorlik va tizim holati haqida to'liq ma'lumot.</p>
+    </div>
+    <div class="fc">
+      <span class="fi">🌱</span>
+      <h3 class="ft">Ekologik Foyda</h3>
+      <p class="fd">Quyosh energiyasiga o'tish orqali CO₂ emissiyasini kamaytirasiz. 5 kW tizim yiliga taxminan 6–8 tonna CO₂ ga teng ifloslanishni oldini oladi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CALCULATOR ======================== -->
+<section id="calculator">
+  <div class="sh">
+    <div class="ey">Hisob-kitob</div>
+    <h2 class="st">Tejamkorlikni Hisoblang</h2>
+    <p class="ss">Quyosh paneli o'rnatish orqali qancha tejashingizni bilib oling — bepul va onlayn.</p>
+  </div>
+  <div class="calc-wrap">
+    <div class="cg">
+      <div class="cinputs">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">📋 Ma'lumotlarni Kiriting</h3>
+        <div class="cig">
+          <label class="cl">Oylik elektr sarfingiz (kWh)</label>
+          <input type="range" min="100" max="3000" value="500" id="kwh" oninput="calc()">
+          <div class="cv"><span>100 kWh</span><span id="kwhV" style="color:var(--gold);font-weight:700">500 kWh</span><span>3000 kWh</span></div>
+        </div>
+        <div class="cig">
+          <label class="cl">Elektr tarifi (so'm/kWh)</label>
+          <input type="range" min="200" max="1200" value="500" id="tariff" oninput="calc()">
+          <div class="cv"><span>200</span><span id="tariffV" style="color:var(--gold);font-weight:700">500 so'm</span><span>1200</span></div>
+        </div>
+        <div class="cig">
+          <label class="cl">O'rnatmoqchi bo'lgan quvvat (kW)</label>
+          <input type="range" min="1" max="100" value="5" id="pw" oninput="calc()">
+          <div class="cv"><span>1 kW</span><span id="pwV" style="color:var(--gold);font-weight:700">5 kW</span><span>100 kW</span></div>
+        </div>
+        <div class="cig">
+          <label class="cl">Joylashuv (kunlik quyosh soatlari)</label>
+          <input type="range" min="3" max="7" value="5" step="0.5" id="sun" oninput="calc()">
+          <div class="cv"><span>3 soat</span><span id="sunV" style="color:var(--gold);font-weight:700">5 soat</span><span>7 soat</span></div>
+        </div>
+      </div>
+      <div class="cresults">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">📈 Hisoblash Natijalari</h3>
+        <div class="rc">
+          <div class="rl">☀️ Kunlik ishlab chiqarish</div>
+          <div class="rv" id="rDaily">25 kWh</div>
+        </div>
+        <div class="rc">
+          <div class="rl">⚡ Oylik ishlab chiqarish</div>
+          <div class="rv" id="rMonth">750 kWh</div>
+        </div>
+        <div class="rc">
+          <div class="rl">💰 Oylik tejamkorlik</div>
+          <div class="rv" id="rMSave">375 000 so'm</div>
+        </div>
+        <div class="rc">
+          <div class="rl">📅 Yillik tejamkorlik</div>
+          <div class="rv" id="rYSave">4 500 000 so'm</div>
+        </div>
+        <div class="rc">
+          <div class="rl">⏱️ O'zini qoplash muddati</div>
+          <div class="rv" id="rPay">4.2 yil</div>
+        </div>
+        <button class="btn btn-p" style="width:100%;padding:14px;font-size:15px;border-radius:14px;margin-top:4px" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Bepul Taklif Olish →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact">
+  <div class="sh">
+    <div class="ey">Aloqa</div>
+    <h2 class="st">Biz bilan Bog'laning</h2>
+    <p class="ss">Savol yoki murojaat bormi? Mutaxassislarimiz 24 soat ichida javob beradi.</p>
+  </div>
+  <div class="cgrid">
+    <div class="cinfo">
+      <div class="ci-item">
+        <span class="ci-icon">📍</span>
+        <div>
+          <h4>Manzilimiz</h4>
+          <p>Toshkent sh., Chilonzor tumani, Bunyodkor ko'chasi, 12-uy</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <span class="ci-icon">📞</span>
+        <div>
+          <h4>Telefon Raqamlar</h4>
+          <p>+998 90 123-45-67 | +998 71 234-56-78</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <span class="ci-icon">✉️</span>
+        <div>
+          <h4>Email Manzillar</h4>
+          <p>info@solaruz.uz | sales@solaruz.uz</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <span class="ci-icon">✈️</span>
+        <div>
+          <h4>Telegram Kanal</h4>
+          <p>@SolarUzPro — tez va qulay muloqot</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <span class="ci-icon">🕐</span>
+        <div>
+          <h4>Ish Vaqtimiz</h4>
+          <p>Du–Sha: 9:00–18:00 | Yak: 10:00–15:00</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <span class="ci-icon">🗺️</span>
+        <div>
+          <h4>Xizmat Hududimiz</h4>
+          <p>Butun O'zbekiston bo'ylab — barcha viloyatlar</p>
+        </div>
+      </div>
+    </div>
+    <div class="cform">
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:6px">📩 Murojaat Yuborish</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px">Formani to'ldiring — 24 soat ichida javob beramiz</p>
+      <input type="text" class="fi" placeholder="To'liq ismingiz *">
+      <input type="tel" class="fi" placeholder="Telefon raqamingiz *">
+      <input type="email" class="fi" placeholder="Email manzilingiz">
+      <select class="fi">
+        <option value="">Qiziqish sohangizni tanlang</option>
+        <option>🏠 Uy uchun quyosh paneli tizimi</option>
+        <option>🏢 Tijorat obyekti uchun tizim</option>
+        <option>🏭 Sanoat korxonasi uchun tizim</option>
+        <option>⚡ Faqat invertor kerak</option>
+        <option>🔋 Batareya saqlash tizimi</option>
+        <option>📊 Texnik maslahat va loyiha</option>
+        <option>🔧 Mavjud tizimni ta'mirlash</option>
+      </select>
+      <select class="fi">
+        <option value="">Byudjetingizni belgilang</option>
+        <option>$500 – $1,000</option>
+        <option>$1,000 – $3,000</option>
+        <option>$3,000 – $10,000</option>
+        <option>$10,000 – $50,000</option>
+        <option>$50,000 dan yuqori</option>
+      </select>
+      <textarea class="fi" placeholder="Qo'shimcha ma'lumot yoki savollaringiz..."></textarea>
+      <button class="btn btn-p" style="padding:14px;font-size:15px;border-radius:14px" onclick="sendForm()">Murojaatni Yuborish ✓</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div class="fbrand">
+      <div class="logo" style="font-size:20px;text-decoration:none">
+        <div class="logo-icon">☀️</div>
+        SolarUz Pro
+      </div>
+      <p>O'zbekistonning eng yirik quyosh energiyasi mahsulotlari va xizmatlar markazi. 2015-yildan beri ishonchli va professional xizmat.</p>
+      <div class="socials">
+        <a class="sb" href="#">📘</a>
+        <a class="sb" href="#">📸</a>
+        <a class="sb" href="#">✈️</a>
+        <a class="sb" href="#">▶️</a>
+        <a class="sb" href="#">🐦</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="fh">Mahsulotlar</h4>
+      <ul class="fl">
+        <li><a href="#">Uy panellari</a></li>
+        <li><a href="#">Tijorat panellar</a></li>
+        <li><a href="#">Sanoat tizimlari</a></li>
+        <li><a href="#">Invertorlar</a></li>
+        <li><a href="#">Batareyalar</a></li>
+        <li><a href="#">Aksessuarlar</a></li>
+        <li><a href="#">Gibrid tizimlar</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="fh">Kompaniya</h4>
+      <ul class="fl">
+        <li><a href="#">Biz haqimizda</a></li>
+        <li><a href="#">Jamoamiz</a></li>
+        <li><a href="#">Sertifikatlar</a></li>
+        <li><a href="#">Tugatilgan loyihalar</a></li>
+        <li><a href="#">Yangiliklar & Blog</a></li>
+        <li><a href="#">Karyera</a></li>
+        <li><a href="#">Hamkorlik</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="fh">Xizmatlar</h4>
+      <ul class="fl">
+        <li><a href="#">Bepul maslahat</a></li>
+        <li><a href="#">Loyihalash</a></li>
+        <li><a href="#">Professional montaj</a></li>
+        <li><a href="#">Texnik xizmat</a></li>
+        <li><a href="#">Kafolat ta'miri</a></li>
+        <li><a href="#">Smart monitoring</a></li>
+        <li><a href="#">Bo'lib to'lash</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb-bottom">
+    <p>© 2024 SolarUz Pro. Barcha huquqlar himoyalangan.</p>
+    <p>Litsenziya: O'z.Resp. Energetika Vazirligi №ELN-2015-0147</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// === PRODUCTS DATA ===
+const prods=[
+  // UY UCHUN
+  {id:1,n:"SunPower Maxeon 3",cat:"uy",type:"Monokristallin",pwr:"400W",eff:"22.6%",war:"25 yil",pr:299,old:349,badge:"Top Sifat",bc:"bg",icon:"🌞",brand:"SunPower"},
+  {id:2,n:"LG NeON R 380W",cat:"uy",type:"Monokristallin",pwr:"380W",eff:"21.4%",war:"25 yil",pr:249,old:299,badge:"Bestseller",bc:"bh",icon:"⚡",brand:"LG Solar"},
+  {id:3,n:"Panasonic EverVolt 370W",cat:"uy",type:"HIT Texnologiya",pwr:"370W",eff:"21.2%",war:"25 yil",pr:229,old:259,badge:"Yangi",bc:"bn",icon:"☀️",brand:"Panasonic"},
+  {id:4,n:"REC Alpha 380W",cat:"uy",type:"Monokristallin",pwr:"380W",eff:"21.7%",war:"25 yil",pr:239,old:279,badge:"-15%",bc:"bs",icon:"🔆",brand:"REC Group"},
+  {id:5,n:"Q CELLS Q.PEAK DUO 365W",cat:"uy",type:"Monokristallin",pwr:"365W",eff:"20.9%",war:"12 yil",pr:179,old:199,badge:"Iqtisodiy",bc:"bn",icon:"💡",brand:"Q CELLS"},
+  {id:6,n:"Jinko Solar Eagle 350W",cat:"uy",type:"Monokristallin",pwr:"350W",eff:"20.1%",war:"12 yil",pr:159,old:189,badge:"-16%",bc:"bs",icon:"🌤️",brand:"Jinko Solar"},
+  {id:7,n:"Canadian Solar 330W",cat:"uy",type:"Polikristallin",pwr:"330W",eff:"17.2%",war:"10 yil",pr:139,old:159,badge:"Arzon",bc:"bs",icon:"🍁",brand:"Canadian Solar"},
+  {id:8,n:"Trina Solar Honey 320W",cat:"uy",type:"Polikristallin",pwr:"320W",eff:"16.8%",war:"10 yil",pr:129,old:149,badge:"Byudjet",bc:"bs",icon:"🌿",brand:"Trina Solar"},
+  {id:9,n:"Yingli Solar YGE-U 310W",cat:"uy",type:"Polikristallin",pwr:"310W",eff:"16.2%",war:"10 yil",pr:119,old:139,badge:"-14%",bc:"bs",icon:"⭐",brand:"Yingli Solar"},
+  // TIJORAT
+  {id:10,n:"First Solar Series 6 450W",cat:"tijorat",type:"Kadmiy Tellurid",pwr:"450W",eff:"19.0%",war:"25 yil",pr:399,old:449,badge:"Pro",bc:"bg",icon:"🏢",brand:"First Solar"},
+  {id:11,n:"SolarEdge Clearline 420W",cat:"tijorat",type:"Monokristallin",pwr:"420W",eff:"21.3%",war:"25 yil",pr:429,old:499,badge:"Premium",bc:"bg",icon:"⚡",brand:"SolarEdge"},
+  {id:12,n:"Hanwha Q.PEAK DUO XL 440W",cat:"tijorat",type:"Monokristallin",pwr:"440W",eff:"20.6%",war:"25 yil",pr:389,old:429,badge:"Bestseller",bc:"bh",icon:"🔥",brand:"Hanwha"},
+  {id:13,n:"LONGi Hi-MO5 460W",cat:"tijorat",type:"Monokristallin PERC",pwr:"460W",eff:"21.1%",war:"25 yil",pr:419,old:469,badge:"Yangi",bc:"bn",icon:"🚀",brand:"LONGi Solar"},
+  {id:14,n:"JA Solar DeepBlue 3.0 450W",cat:"tijorat",type:"Monokristallin",pwr:"450W",eff:"20.9%",war:"25 yil",pr:399,old:439,badge:"-9%",bc:"bs",icon:"💫",brand:"JA Solar"},
+  // SANOAT
+  {id:15,n:"Canadian Solar BiHiKu7 550W",cat:"sanoat",type:"Bifasial Mono",pwr:"550W",eff:"21.4%",war:"25 yil",pr:599,old:699,badge:"Industrial",bc:"bg",icon:"🏭",brand:"Canadian Solar"},
+  {id:16,n:"Jinko Tiger Neo 600W",cat:"sanoat",type:"N-Type TOPCon",pwr:"600W",eff:"22.5%",war:"25 yil",pr:649,old:749,badge:"Super",bc:"bh",icon:"⚡",brand:"Jinko Solar"},
+  {id:17,n:"Trina Vertex S 580W",cat:"sanoat",type:"Mono PERC",pwr:"580W",eff:"21.8%",war:"25 yil",pr:619,old:699,badge:"Bestseller",bc:"bh",icon:"🌟",brand:"Trina Solar"},
+  {id:18,n:"LONGi Hi-MO 6 580W",cat:"sanoat",type:"Bifasial HPBC",pwr:"580W",eff:"22.0%",war:"25 yil",pr:629,old:729,badge:"Premium",bc:"bg",icon:"💎",brand:"LONGi Solar"},
+  {id:19,n:"JA Solar Ultra 700W",cat:"sanoat",type:"N-Type Bifasial",pwr:"700W",eff:"22.8%",war:"25 yil",pr:849,old:999,badge:"Yangi",bc:"bn",icon:"🔆",brand:"JA Solar"},
+  // INVERTORLAR
+  {id:20,n:"SMA Sunny Boy 5.0 kW",cat:"invertor",type:"Setka invertori",pwr:"5 kW",eff:"97.2%",war:"5 yil",pr:1299,old:1499,badge:"Ishonchli",bc:"bg",icon:"⚡",brand:"SMA"},
+  {id:21,n:"Fronius Symo 10 kW",cat:"invertor",type:"3-fazali invertor",pwr:"10 kW",eff:"98.1%",war:"5 yil",pr:2199,old:2499,badge:"Pro",bc:"bg",icon:"🔌",brand:"Fronius"},
+  {id:22,n:"SolarEdge SE7600H",cat:"invertor",type:"HD Wave",pwr:"7.6 kW",eff:"99.2%",war:"12 yil",pr:1899,old:2199,badge:"Smart",bc:"bn",icon:"💡",brand:"SolarEdge"},
+  {id:23,n:"Huawei SUN2000 10 kW",cat:"invertor",type:"AI Smart",pwr:"10 kW",eff:"98.6%",war:"10 yil",pr:1599,old:1899,badge:"AI",bc:"bh",icon:"🤖",brand:"Huawei"},
+  {id:24,n:"Sungrow SG5RS 5 kW",cat:"invertor",type:"Gibrid invertor",pwr:"5 kW",eff:"97.8%",war:"10 yil",pr:1099,old:1299,badge:"-15%",bc:"bs",icon:"🌊",brand:"Sungrow"},
+  {id:25,n:"Sol-Ark 15kW Gibrid",cat:"invertor",type:"Gibrid All-in-One",pwr:"15 kW",eff:"98.0%",war:"10 yil",pr:3499,old:3999,badge:"Kuchli",bc:"bh",icon:"🔥",brand:"Sol-Ark"},
+  {id:26,n:"Growatt SPH 6000TL3",cat:"invertor",type:"Gibrid invertor",pwr:"6 kW",eff:"97.5%",war:"10 yil",pr:1199,old:1399,badge:"Tejamkor",bc:"bs",icon:"🌱",brand:"Growatt"},
+  {id:27,n:"Sunsynk 8kW All-in-One",cat:"invertor",type:"Smart Gibrid",pwr:"8 kW",eff:"97.8%",war:"5 yil",pr:1799,old:2099,badge:"All-in-1",bc:"bg",icon:"🌠",brand:"Sunsynk"},
+  {id:28,n:"Victron MultiPlus-II 10kVA",cat:"invertor",type:"Invertor+Zaryadchi",pwr:"10 kVA",eff:"96.0%",war:"5 yil",pr:2499,old:2799,badge:"Off-Grid",bc:"bn",icon:"🔋",brand:"Victron"},
+  // BATAREYALAR
+  {id:29,n:"Tesla Powerwall 2 13.5kWh",cat:"batareya",type:"Litiy-Ion",pwr:"13.5 kWh",eff:"90%",war:"10 yil",pr:8500,old:9500,badge:"Premium",bc:"bg",icon:"⚡",brand:"Tesla"},
+  {id:30,n:"LG RESU 10H 9.8kWh",cat:"batareya",type:"Li-NMC",pwr:"9.8 kWh",eff:"95%",war:"10 yil",pr:5200,old:5999,badge:"Bestseller",bc:"bh",icon:"🔋",brand:"LG Energy"},
+  {id:31,n:"BYD Battery Box 10kWh",cat:"batareya",type:"LiFePO4",pwr:"10 kWh",eff:"95.4%",war:"10 yil",pr:4800,old:5500,badge:"Yangi",bc:"bn",icon:"💾",brand:"BYD"},
+  {id:32,n:"Pylontech US3000C 74Ah",cat:"batareya",type:"LiFePO4 Moduli",pwr:"3.55 kWh",eff:"95%",war:"10 yil",pr:1299,old:1499,badge:"Steklanadigan",bc:"bn",icon:"🔷",brand:"Pylontech"},
+  {id:33,n:"Sonnen ECO 10kWh",cat:"batareya",type:"LFP Nemis",pwr:"10 kWh",eff:"86%",war:"10 yil",pr:9500,old:10999,badge:"German",bc:"bg",icon:"🇩🇪",brand:"Sonnen"},
+  // AKSESSUARLAR
+  {id:34,n:"MC4 Konnektorlar 50 juft",cat:"aksessuar",type:"Konnektorlar",pwr:"1000V DC",eff:"IP68",war:"2 yil",pr:49,old:69,badge:"-29%",bc:"bs",icon:"🔗",brand:"Stäubli"},
+  {id:35,n:"Solar Kabel 6mm² 100m",cat:"aksessuar",type:"DC Kabel",pwr:"1.5kV DC",eff:"UV bardosh",war:"2 yil",pr:189,old:219,badge:"Sifatli",bc:"bn",icon:"🔌",brand:"Helukabel"},
+  {id:36,n:"Al Panel Reykalar Komplekti",cat:"aksessuar",type:"Montaj tizimi",pwr:"—",eff:"Anodlangan",war:"20 yil",pr:149,old:199,badge:"-25%",bc:"bs",icon:"⚙️",brand:"K2 Systems"},
+];
+
+let cart=[];
+
+function renderGrid(f='all'){
+  const g=document.getElementById('grid');
+  const items=f==='all'?prods:prods.filter(p=>p.cat===f);
+  g.innerHTML=items.map((p,i)=>`
+    <div class="pc hidden" id="p${p.id}" style="animation-delay:${(i%8)*.065}s">
+      <div class="pi pi-bg2" style="background:linear-gradient(135deg,rgba(255,149,0,.1),rgba(255,214,10,.05))">
+        <span style="font-size:68px">${p.icon}</span>
+        <div class="pbadge ${p.bc}">${p.badge}</div>
+      </div>
+      <div class="pb">
+        <div class="pt">${p.brand} · ${p.type}</div>
+        <div class="pn">${p.n}</div>
+        <div class="specs">
+          <div class="sp"><span class="spl">Quvvat</span><span class="spv">${p.pwr}</span></div>
+          <div class="sp"><span class="spl">Samaradorlik</span><span class="spv">${p.eff}</span></div>
+          <div class="sp"><span class="spl">Kafolat</span><span class="spv">${p.war}</span></div>
+          <div class="sp"><span class="spl">Brend</span><span class="spv">${p.brand.split(' ')[0]}</span></div>
+        </div>
+        <div class="pfoot">
+          <div>
+            <div class="price-now">$${p.pr.toLocaleString()}</div>
+            <div class="price-old">$${p.old.toLocaleString()}</div>
+          </div>
+          <button class="add" onclick="addCart(${p.id})" title="Savatga qo'shish">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  requestAnimationFrame(()=>{
+    items.forEach((p,i)=>{
+      const el=document.getElementById('p'+p.id);
+      if(el) setTimeout(()=>{el.classList.remove('hidden');el.classList.add('vis')},i*55);
+    });
+  });
+}
+
+function filter(cat,btn){
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(cat);
+}
+
+function addCart(id){
+  const p=prods.find(x=>x.id===id);
+  if(p){
+    cart.push(p);
+    document.getElementById('cartCount').textContent=cart.length;
+    toast(`✅ ${p.n} savatga qo'shildi!`);
+  }
+}
+
+function toggleCart(){
+  if(!cart.length) return toast("🛒 Savat hozircha bo'm-bo'sh!");
+  const tot=cart.reduce((s,p)=>s+p.pr,0);
+  toast(`🛒 ${cart.length} mahsulot | Jami: $${tot.toLocaleString()}`);
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+// Calculator
+function calc(){
+  const kwh=+document.getElementById('kwh').value;
+  const tariff=+document.getElementById('tariff').value;
+  const pw=+document.getElementById('pw').value;
+  const sun=+document.getElementById('sun').value;
+  document.getElementById('kwhV').textContent=kwh+' kWh';
+  document.getElementById('tariffV').textContent=tariff.toLocaleString()+' so\'m';
+  document.getElementById('pwV').textContent=pw+' kW';
+  document.getElementById('sunV').textContent=sun+' soat';
+  const daily=pw*sun;
+  const monthly=daily*30;
+  const mSave=Math.min(monthly,kwh)*tariff;
+  const ySave=mSave*12;
+  const cost=pw*1200000;
+  const payback=ySave>0?cost/ySave:0;
+  document.getElementById('rDaily').textContent=daily.toFixed(1)+' kWh';
+  document.getElementById('rMonth').textContent=Math.round(monthly).toLocaleString()+' kWh';
+  document.getElementById('rMSave').textContent=Math.round(mSave).toLocaleString()+' so\'m';
+  document.getElementById('rYSave').textContent=Math.round(ySave).toLocaleString()+' so\'m';
+  document.getElementById('rPay').textContent=payback>0?payback.toFixed(1)+' yil':'—';
+}
+
+function sendForm(){
+  toast("📨 Murojaatingiz yuborildi! 24 soat ichida siz bilan bog'lanamiz.");
+}
+
+// Sun rays
+const sw=document.getElementById('sunWrap');
+for(let i=0;i<18;i++){
+  const r=document.createElement('div');
+  r.className='ray';
+  const h=140+Math.random()*120;
+  r.style.cssText=`width:2px;height:${h}px;background:linear-gradient(to top,transparent,rgba(255,214,10,${.25+Math.random()*.35}),transparent);transform-origin:0 0;transform:rotate(${i*20}deg);animation-duration:${20+Math.random()*10}s;`;
+  sw.appendChild(r);
+}
+
+// Nav active on scroll
+const secs=document.querySelectorAll('section[id]');
+const nls=document.querySelectorAll('.nl[href^="#"]');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+  });
+},{threshold:.3});
+secs.forEach(s=>io.observe(s));
+
+// Init
+renderGrid();
+calc();
+</script>
+</body>
+</html>
